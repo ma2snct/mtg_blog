@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 //追加モジュール
-var nano = require('nano')('http://localhost:5984');
-var db = require('nano')('http://localhost:5984/mtg');
+var nano = require('nano')('https://ma2snct.cloudant.com');
+var db = require('nano')('https://ma2snct.cloudant.com/mtg');
 var mtg = nano.use('mtg');
 var assert = require('assert');
 var fs = require('fs');
