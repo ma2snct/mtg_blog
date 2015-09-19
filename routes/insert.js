@@ -6,17 +6,17 @@ var nano = require('nano')('http://localhost:5984');
 var db = require('nano')('http://localhost:5984/mtg');
 var mtg = nano.use('mtg');
 var assert = require('assert');
+var fs = require('fs');
 
 
 router.get('/', function(req, res, next) {
-	var data = {'_id':'wed-mtg', 'tit':'ウィザーズタワー', 'con':'ふたりでしました。'};
-	//mtg.insert({_id:req._id, title:req.tit, content:req.con}, function(err, body, header){
-	mtg.insert({_id:data._id, title:data.tit, content:data.con}, function(err, body, header){
-		if(err){
-			console.log('[mtg.insert-err]', err.message);
-			return;
-		}else{
-			console.log('you have changed the mtg database.');
+	var data = {'tit':'ウィザーズタワー', 'con':'ふたりでしました。'};
+	fs.readFile('./public/images/a.jpeg', function(err, data){
+		if(!err){
+			mtg.multipart.insert({'foo':'bar'}, [{name: 'a.jpg', data: data, content_type:'image/jpeg'}], 'mtg-wed-img-2', function(err, body){
+				if(!err)
+					console.log('done');
+			});
 		}
 	});
 });
