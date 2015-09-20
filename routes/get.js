@@ -10,10 +10,11 @@ var fs = require('fs');
 
 
 router.get('/', function(req, res, next) {
-  db.get('mtg-wed-img-2', function(err, body){
+  db.multipart.get('mtg-wed-img-2', function(err, body){
 	  if(!err)
-		  console.log(body.foo);
+		  //console.log(body._attachments);
 		  //console.log(buffer);
+      res.render('get', { title: 'mtg-wed', img:'img src ="https://ma2snct.cloudant.com/mtg/mtg-wed-img-2/a.jpg" height="400" width="600"' })
   });
 });
 
